@@ -23,9 +23,8 @@ export class UsersService {
       throw error;
     }
   }
+
   async signUp(email: string, password: string) {
-    //see if email is in use
-    //console.log (this.userService)
     const users = await this.userRepository.findUserEmail(email);
     if (users.length) {
       throw new ConflictException('email in use');
@@ -54,6 +53,7 @@ export class UsersService {
       throw new UnauthorizedException('Bad Password');
     } else return user;
   }
+
   findAll() {
     try {
       return this.userRepository.getAllUsers();
@@ -61,6 +61,7 @@ export class UsersService {
       throw error;
     }
   }
+
   findUserEmail(email: string) {
     try {
       // console.log(email);
@@ -85,6 +86,7 @@ export class UsersService {
       throw error;
     }
   }
+
   updatePut(id: number, updateStudentDto: UpdateUserDto) {
     try {
       return this.userRepository.updateUserPut(id, updateStudentDto);

@@ -5,6 +5,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { DbError } from 'src/shared.config/dberror.error';
 import { AssignToTeacherDto } from './dto/assign-to-teacher.dto';
+import { StudentsService } from 'src/students/students.service';
 
 @Injectable()
 export class CourseRepository extends Repository<CoursesEntity> {

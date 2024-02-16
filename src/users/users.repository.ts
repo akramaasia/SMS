@@ -39,6 +39,7 @@ export class UserRepository extends Repository<UsersEntity> {
       throw new DbError(error);
     });
   }
+
   async removeUser(id: number) {
     const userById = await this.findUserById(id);
     if (!userById) {
@@ -48,6 +49,7 @@ export class UserRepository extends Repository<UsersEntity> {
       throw new DbError(error);
     });
   }
+
   async updateUserPut(id: number, updateUserDto: UpdateUserDto) {
     const userById = await this.findUserById(id);
     if (!userById) {

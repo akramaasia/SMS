@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable , NotFoundException} from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CourseRepository } from './courses.repository';
@@ -53,6 +53,11 @@ export class CoursesService {
       const teacher = await this.teacherService.findOne(
         assignToTeacherDto.teacherId,
       );
+      if (!teacher)
+      {
+        throw new NotFoundException(`Teacher with id ${assignToTeacherDto.teacherId} not found`);
+
+      }
       assignToTeacherDto.teacher = teacher;
       return this.coursesRepository.assignCourseToTeacher(
         id,

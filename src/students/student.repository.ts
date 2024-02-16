@@ -92,6 +92,11 @@ export class StudentRepository extends Repository<StudentsEntity> {
     {
     for (let i = 0; i < idsUsingMap.length; i++) {
       const course = await this.courseService.findOne(idsUsingMap[i]);
+      if (!course)
+      {
+        throw new NotFoundException(`course with id ${idsUsingMap[i]} not found`);
+
+      }
       assignCourseToStudentDto.courses[i] = course;
     }
     }

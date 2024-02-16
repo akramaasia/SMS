@@ -8,6 +8,8 @@ import {
   Delete,
   Session,
   UseGuards,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -29,26 +31,33 @@ export class UsersController {
     session.userId = user.id;
     return user;
   }
+
   @Post('/signin')
   async signIn(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.usersService.singIn(body.email, body.password);
     session.userId = user.id;
     return user;
   }
+
   @Post('/signout')
   signOut(@Session() session: any) {
     session.userId = null;
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/whoami')
   @UseGuards(AuthGuard)
   whoAmI(@CurrentUser() user: string) {
     return user;
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(parseInt(id));

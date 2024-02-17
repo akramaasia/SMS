@@ -1,14 +1,6 @@
 //export class Student {}
-import {
-  Entity,
-  Column,
-  OneToMany,
-  ManyToOne,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Entity, Column, ManyToMany } from 'typeorm';
 import { BaseEntity } from 'src/shared.entities/base.entity';
-import { StudentCourseEntity } from 'src/students/entities/studentcourse.entity';
 import { CoursesEntity } from 'src/courses/entities/course.entity';
 
 @Entity('sms_students')
